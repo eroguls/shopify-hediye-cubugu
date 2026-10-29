@@ -1,0 +1,18 @@
+{% doc %}
+  Hediye çubuğunun görüneceği yer: kalan tutar metni, ilerleme çubuğu ve kademede birden
+  fazla hediye varsa seçim düğmeleri. Sepet sayfasına, sepet çekmecesine ya da ikisine birden
+  konabilir; içini hediye-cubugu.js doldurur. Betik çalışmazsa alan gizli kalır.
+
+  Sınıf adları bilerek stilsizdir; temanızın CSS’iyle biçimlendirin.
+
+  @example
+  {% render 'hediye-cubugu' %}
+{% enddoc %}
+
+{%- if settings.hc_etkin -%}
+  <div class="hediye-cubugu" data-hediye-cubugu hidden>
+    <p class="hediye-cubugu__mesaj" data-hediye-cubugu-mesaj role="status"></p>
+    <progress class="hediye-cubugu__ilerleme" data-hediye-cubugu-ilerleme max="100" value="0" aria-label="Sıradaki hediyeye ilerleme"></progress>
+    <div class="hediye-cubugu__secenekler" data-hediye-cubugu-secenekler role="group" aria-label="Hediyenizi seçin"></div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "shopify-hediye-cubugu",
+    "theme_version": "0.1.0",
+    "theme_author": "Salih Eroğul",
+    "theme_documentation_url": "https://github.com/eroguls/shopify-hediye-cubugu",
+    "theme_support_url": "https://github.com/eroguls/shopify-hediye-cubugu/issues"
+  },
+  {
+    "name": "Hediye çubuğu",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Hediyeyi ücretsiz yapan, Shopify yöneticisindeki otomatik “X alana Y” indirimidir. Her kademe için bir indirim açın; eşik, indirimin en az tutarıyla aynı olmalı."
+      },
+      { "type": "checkbox", "id": "hc_etkin", "label": "Hediye çubuğunu göster", "default": false },
+      {
+        "type": "text",
+        "id": "hc_metin_kalan",
+        "label": "Eşiğe kalan metni",
+        "default": "{tutar} daha ekleyin, {etiket} hediye.",
+        "info": "{tutar} kalan tutar, {etiket} sıradaki kademenin adıdır."
+      },
+      {
+        "type": "text",
+        "id": "hc_metin_tamam",
+        "label": "Son kademe metni",
+        "default": "{etiket} hediyeniz sepette."
+      },
+      { "type": "header", "content": "1. kademe" },
+      { "type": "number", "id": "hc_k1_esik", "label": "Eşik (ana para biriminde, ör. 1500)" },
+      { "type": "text", "id": "hc_k1_etiket", "label": "Kademe adı", "default": "Bileklik" },
+      {
+        "type": "product_list",
+        "id": "hc_k1_urunler",
+        "label": "Hediye ürünleri",
+        "limit": 4,
+        "info": "Stoktaki her varyant seçenek olarak sunulur; ilki varsayılan hediyedir."
+      },
+      { "type": "header", "content": "2. kademe" },
+      { "type": "number", "id": "hc_k2_esik", "label": "Eşik (ana para biriminde)" },
+      { "type": "text", "id": "hc_k2_etiket", "label": "Kademe adı" },
+      { "type": "product_list", "id": "hc_k2_urunler", "label": "Hediye ürünleri", "limit": 4 },
+      { "type": "header", "content": "3. kademe" },
+      { "type": "number", "id": "hc_k3_esik", "label": "Eşik (ana para biriminde)" },
+      { "type": "text", "id": "hc_k3_etiket", "label": "Kademe adı" },
+      { "type": "product_list", "id": "hc_k3_urunler", "label": "Hediye ürünleri", "limit": 4 },
+      {
+        "type": "checkbox",
+        "id": "hc_sepet_yenile",
+        "label": "Hediye değişince sepet sayfasını yenile",
+        "default": true,
+        "info": "Sepet sayfası AJAX ile kendini güncellemiyorsa açık bırakın."
+      }
+    ]
+  }
+]

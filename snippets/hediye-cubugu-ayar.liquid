@@ -1,0 +1,65 @@
+{% doc %}
+  Hediye çubuğunun ayarlarını sayfaya yazar ve betiği yükler. Her sayfada bir kez,
+  layout/theme.liquid içinde </body> etiketinden hemen önce çağrılır.
+
+  Ayarlar temanın “Hediye çubuğu” grubundan gelir (config/settings_schema.json). Kademe
+  eşikleri ana para biriminde girilir ve kuruşa çevrilir; betik, ziyaretçi başka bir para
+  biriminde geziyorsa Shopify’ın kuruyla ölçekler.
+
+  @example
+  {% render 'hediye-cubugu-ayar' %}
+{% enddoc %}
+
+{%- if settings.hc_etkin -%}
+  <script type="application/json" data-hediye-cubugu-ayar>
+    {
+      "paraBicimi": {{ shop.money_format | json }},
+      "sepetSayfasindaYenile": {{ settings.hc_sepet_yenile | json }},
+      "metinler": {
+        "kalan": {{ settings.hc_metin_kalan | json }},
+        "tamam": {{ settings.hc_metin_tamam | json }}
+      },
+      "kademeler": [
+        {%- assign ilk_kademe = true -%}
+        {%- for n in (1..3) -%}
+          {%- liquid
+            assign esik_anahtari = 'hc_k' | append: n | append: '_esik'
+            assign etiket_anahtari = 'hc_k' | append: n | append: '_etiket'
+            assign urun_anahtari = 'hc_k' | append: n | append: '_urunler'
+            assign esik = settings[esik_anahtari]
+            assign urunler = settings[urun_anahtari]
+          -%}
+          {%- if esik > 0 and urunler != blank -%}
+            {%- unless ilk_kademe %},{% endunless -%}
+            {%- assign ilk_kademe = false -%}
+            {
+              "esik": {{ esik | times: 100 }},
+              "etiket": {{ settings[etiket_anahtari] | default: 'Hediye' | json }},
+              "hediyeler": [
+                {%- assign ilk_hediye = true -%}
+                {%- for urun in urunler -%}
+                  {%- for varyant in urun.variants -%}
+                    {%- unless ilk_hediye %},{% endunless -%}
+                    {%- assign ilk_hediye = false -%}
+                    {%- liquid
+                      assign baslik = urun.title
+                      unless urun.has_only_default_variant
+                        assign baslik = urun.title | append: ' – ' | append: varyant.title
+                      endunless
+                    -%}
+                    {
+                      "id": {{ varyant.id }},
+                      "baslik": {{ baslik | json }},
+                      "stokta": {{ varyant.available | json }}
+                    }
+                  {%- endfor -%}
+                {%- endfor -%}
+              ]
+            }
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  <script src="{{ 'hediye-cubugu.js' | asset_url }}" defer></script>
+{%- endif -%}

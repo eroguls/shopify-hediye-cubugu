@@ -1,0 +1,20 @@
+{
+  "name": "shopify-hediye-cubugu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shopify sepetinde kademeli hediye çubuğu: eşiğe ulaşınca hediyeyi ekler, seçim sunar, tutar düşünce çıkarır.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "@shopify/theme-check-node": "3.31.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": "github:eroguls/shopify-hediye-cubugu",
+  "author": "Salih Eroğul (https://saliherogul.com)",
+  "license": "MIT"
+}
